@@ -1,3 +1,88 @@
-<h2>Livestock Tips</h2>
-<p>This is the livestock tips page.</p>
-<a href="{% url 'home' %}">Back to Home</a>
+{% extends 'users/base.html' %}
+
+{% block title %}Livestock Tips{% endblock %}
+
+{% block content %}
+<style>
+  .livestock-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #fff9f0;
+    border: 2px solid #f0c987;
+    border-radius: 12px;
+    font-family: "Segoe UI", sans-serif;
+  }
+
+  .livestock-heading {
+    font-size: 28px;
+    color: #5c4400;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .tip-section {
+    margin-bottom: 20px;
+  }
+
+  .tip-section h3 {
+    color: #7a5900;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .tip-section ul {
+    list-style: disc;
+    padding-left: 20px;
+    color: #333;
+  }
+
+  .back-link {
+    display: block;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 16px;
+    color: #1d3557;
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="livestock-container">
+  <h2 class="livestock-heading">🐄 Livestock Health & Care Tips</h2>
+
+  <div class="tip-section">
+    <h3>🩺 Disease Detection</h3>
+    <ul>
+      <li>Monitor for symptoms like coughing, diarrhea, reduced appetite, and abnormal behavior.</li>
+      <li>Regularly inspect skin, hooves, eyes, and temperature.</li>
+      <li>Watch for signs of common illnesses: Foot-and-Mouth Disease, Mastitis, and Bloat.</li>
+    </ul>
+  </div>
+
+  <div class="tip-section">
+    <h3>🛡️ Prevention Tips</h3>
+    <ul>
+      <li>Ensure regular vaccination schedules are followed for all livestock.</li>
+      <li>Maintain clean and dry housing to prevent bacterial growth.</li>
+      <li>Provide clean water and balanced nutrition daily.</li>
+      <li>Quarantine new or sick animals before introducing them to the herd.</li>
+    </ul>
+  </div>
+
+  <div class="tip-section">
+    <h3>🌿 Daily Care Recommendations</h3>
+    <ul>
+      <li>Feed animals at consistent times to support digestion.</li>
+      <li>Brush and clean animals regularly to remove dirt and pests.</li>
+      <li>Allow access to open space for exercise and fresh air.</li>
+      <li>Track health records and schedule regular veterinary visits.</li>
+    </ul>
+  </div>
+
+  <a href="{% url 'home' %}" class="back-link">← Back to Home</a>
+</div>
+{% endblock %}
