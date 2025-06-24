@@ -1,0 +1,349 @@
+<style>
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+        padding: 2rem;
+    }
+
+    .login-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        padding: 3rem;
+        width: 100%;
+        max-width: 420px;
+        border: 1px solid rgba(16, 185, 129, 0.1);
+        box-shadow: 0 20px 60px rgba(16, 185, 129, 0.1);
+        position: relative;
+        overflow: hidden;
+        animation: slideInUp 0.8s ease-out;
+    }
+
+    .login-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #059669, #10b981, #34d399);
+        border-radius: 24px 24px 0 0;
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+
+    .login-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
+        animation: bounce 2s infinite;
+    }
+
+    .login-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #059669;
+        margin-bottom: 0.5rem;
+    }
+
+    .login-subtitle {
+        color: #6b7280;
+        font-size: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+        position: relative;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        border: 2px solid rgba(16, 185, 129, 0.1);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .form-input:focus {
+        border-color: #10b981;
+        box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+        background: rgba(255, 255, 255, 0.95);
+        transform: translateY(-2px);
+    }
+
+    .form-input::placeholder {
+        color: #9ca3af;
+        transition: opacity 0.3s ease;
+    }
+
+    .form-input:focus::placeholder {
+        opacity: 0.7;
+    }
+
+    .input-icon {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6b7280;
+        font-size: 1.2rem;
+        pointer-events: none;
+        transition: color 0.3s ease;
+    }
+
+    .form-input:focus + .input-icon {
+        color: #10b981;
+    }
+
+    .login-button {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: white;
+        background: linear-gradient(135deg, #059669, #10b981);
+        border: none;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 8px 25px rgba(5, 150, 105, 0.3);
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+    }
+
+    .login-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .login-button:hover::before {
+        left: 100%;
+    }
+
+    .login-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 35px rgba(5, 150, 105, 0.4);
+    }
+
+    .login-button:active {
+        transform: translateY(0);
+    }
+
+    .register-link {
+        text-align: center;
+        margin-top: 1.5rem;
+    }
+
+    .register-link a {
+        color: #059669;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .register-link a:hover {
+        background: rgba(16, 185, 129, 0.1);
+        transform: translateY(-1px);
+    }
+
+    .floating-elements {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .floating-plant {
+        position: absolute;
+        font-size: 1.5rem;
+        opacity: 0.1;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-plant:nth-child(1) {
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+    }
+
+    .floating-plant:nth-child(2) {
+        top: 60%;
+        right: 15%;
+        animation-delay: 2s;
+    }
+
+    .floating-plant:nth-child(3) {
+        bottom: 30%;
+        left: 20%;
+        animation-delay: 4s;
+    }
+
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-10px);
+        }
+        60% {
+            transform: translateY(-5px);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-15px) rotate(10deg);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .login-card {
+            padding: 2rem 1.5rem;
+            margin: 1rem;
+        }
+        
+        .login-title {
+            font-size: 1.8rem;
+        }
+        
+        .form-input, .login-button {
+            padding: 0.875rem 1.25rem;
+        }
+    }
+
+    /* Loading state for button */
+    .login-button.loading {
+        pointer-events: none;
+        opacity: 0.8;
+    }
+
+    .login-button.loading::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin: -10px 0 0 -10px;
+        border: 2px solid transparent;
+        border-top: 2px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+
+<div class="floating-elements">
+    <div class="floating-plant">🌱</div>
+    <div class="floating-plant">🌿</div>
+    <div class="floating-plant">🍃</div>
+</div>
+
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <span class="login-icon">🌱</span>
+            <h2 class="login-title">Welcome Back</h2>
+            <p class="login-subtitle">Sign in to your SmartSathi account</p>
+        </div>
+
+        <form method="post" id="loginForm">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <input 
+                    type="text" 
+                    name="username" 
+                    placeholder="Enter your username" 
+                    class="form-input"
+                    required
+                    autocomplete="username"
+                >
+                <span class="input-icon">👤</span>
+            </div>
+
+            <div class="form-group">
+                <input 
+                    type="password" 
+                    name="password" 
+                    placeholder="Enter your password" 
+                    class="form-input"
+                    required
+                    autocomplete="current-password"
+                >
+                <span class="input-icon">🔒</span>
+            </div>
+
+            <button type="submit" class="login-button" id="loginBtn">
+                🚀 Sign In to Dashboard
+            </button>
+        </form>
+
+        <div class="register-link">
+            <a href="{% url 'register' %}">
+                Don't have an account? Join SmartSathi →
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Add loading state to button on form submit
+    document.getElementById('loginForm').addEventListener('submit', function() {
+        const btn = document.getElementById('loginBtn');
+        btn.classList.add('loading');
+        btn.innerHTML = '';
+    });
+
+    // Add floating animation on input focus
+    document.querySelectorAll('.form-input').forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'scale(1.02)';
+        });
+        
+        input.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'scale(1)';
+        });
+    });
+</script>

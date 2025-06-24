@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SmartSathi{% endblock %}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fffe 0%, #f0fdf4 50%, #ecfdf5 100%);
+            min-height: 100vh;
+            position: relative;
+            color: #1f2937;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="leaves" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M25 10 Q30 5 35 10 Q40 15 35 20 Q30 25 25 20 Q20 15 25 10" fill="rgba(34,197,94,0.03)"/><circle cx="15" cy="35" r="1" fill="rgba(34,197,94,0.05)"/><circle cx="40" cy="40" r="0.5" fill="rgba(34,197,94,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23leaves)"/></svg>');
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.08);
+        }
+
+        nav a {
+            color: #374151;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin: 0 1.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: inline-block;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.08));
+            border-radius: 50px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        nav a:hover::before {
+            opacity: 1;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.15);
+            color: #059669;
+        }
+
+        .nav-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #059669, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-right: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-brand::before {
+            content: '🌱';
+            font-size: 1.5rem;
+            -webkit-text-fill-color: initial;
+        }
+
+        .nav-links {
+            display: inline-flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .content-wrapper {
+            min-height: calc(100vh - 100px);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-leaf {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-leaf:nth-child(1) {
+            top: 15%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-leaf:nth-child(2) {
+            top: 45%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+
+        .floating-leaf:nth-child(3) {
+            bottom: 25%;
+            left: 20%;
+            animation-delay: 6s;
+        }
+
+        .floating-leaf:nth-child(4) {
+            top: 70%;
+            right: 30%;
+            animation-delay: 2s;
+        }
+
+        .floating-leaf:nth-child(5) {
+            top: 30%;
+            left: 60%;
+            animation-delay: 5s;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+                opacity: 0.1;
+            }
+            50% { 
+                transform: translateY(-15px) rotate(10deg); 
+                opacity: 0.2;
+            }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(34, 197, 94, 0.1);
+            box-shadow: 0 8px 32px rgba(34, 197, 94, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+                text-align: center;
+            }
+            
+            nav a {
+                margin: 0.25rem;
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .nav-brand {
+                display: block;
+                margin-bottom: 1rem;
+                margin-right: 0;
+                justify-content: center;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+        }
+
+        .grow-animation {
+            animation: grow 3s ease-in-out infinite;
+        }
+
+        @keyframes grow {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Plant health themed accents */
+        .health-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            margin-left: 5px;
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-leaf">🌿</div>
+        <div class="floating-leaf">🍃</div>
+        <div class="floating-leaf">🌱</div>
+        <div class="floating-leaf">🌾</div>
+        <div class="floating-leaf">🌿</div>
+    </div>
+    
+    <nav>
+        <span class="nav-brand grow-animation">SmartSathi</span>
+        <div class="nav-links">
+            {% if user.is_authenticated %}
+                <a href="{% url 'home' %}">🏠 Home<span class="health-indicator"></span></a>
+                <a href="{% url 'chatbot' %}">🤖 Plant Assistant</a>
+                <a href="{% url 'bookkeeping' %}">📊 Crop Records</a>
+                <a href="{% url 'market_prices' %}">💰 Market Prices</a>
+                <a href="{% url 'livestock_tips' %}">🌱 Plant Health</a>
+                <a href="{% url 'logout' %}">🚪 Logout</a>
+            {% else %}
+                <a href="{% url 'landing' %}">🏠 Home</a>
+                <a href="{% url 'login' %}">🔑 Login</a>
+                <a href="{% url 'register' %}">📝 Register</a>
+            {% endif %}
+        </div>
+    </nav>
+    
+    <div class="content-wrapper">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
