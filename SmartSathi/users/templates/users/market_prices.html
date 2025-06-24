@@ -1,3 +1,80 @@
-<h2>Market Prices</h2>
-<p>This is the market prices page.</p>
-<a href="{% url 'home' %}">Back to Home</a>
+{% extends 'users/base.html' %}
+
+{% block title %}Market Prices{% endblock %}
+
+{% block content %}
+<style>
+  .market-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f3fff3;
+    border: 2px solid #a3d9a5;
+    border-radius: 12px;
+    font-family: "Segoe UI", sans-serif;
+  }
+
+  .market-heading {
+    font-size: 28px;
+    color: #2d6a4f;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .market-info {
+    font-size: 18px;
+    color: #444;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .visit-button {
+    background-color: #40916c;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    transition: background-color 0.3s;
+  }
+
+  .visit-button:hover {
+    background-color: #2d6a4f;
+  }
+
+  .back-link {
+    display: block;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 16px;
+    color: #1d3557;
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="market-container">
+  <h2 class="market-heading">🌾 Market Prices</h2>
+  <p class="market-info">
+    Dear farmer, click the button below to visit the official AgmarkNet site for live mandi rates.
+  </p>
+
+  <button onclick="openAgmarknet()" class="visit-button">
+    Visit AgmarkNet
+  </button>
+
+  <a href="{% url 'home' %}" class="back-link">← Back to Home</a>
+</div>
+
+<script>
+  function openAgmarknet() {
+    window.open('https://agmarknet.gov.in/', '_blank');
+  }
+</script>
+{% endblock %}
